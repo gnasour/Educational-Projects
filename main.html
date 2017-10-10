@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <title>Hangman</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <h1 id="title">Hangman of Hell</h1>
+
+    <p id="hangman1" style="padding-left: 50px;margin-bottom: 0px;visibility: hidden">|</p>
+    <p id="hangman2" style="padding-left: 50px;margin-bottom: 0px;visibility: hidden">|</p>
+    <p id="hangman3" style="padding-left: 46px;margin-bottom: 0px;visibility: hidden">O</p>
+    <p id="hangman4" style="padding-left: 50px;margin-bottom: 0px;visibility: hidden">|</p>
+    <p id="hangman5" style="padding-left: 37px;margin-bottom: 0px;visibility: hidden">--|--</p>
+    <p id="hangman6" style="padding-left: 43px;visibility: hidden">/&nbsp;</p>
+
+    <b id="word"> Word: </b>
+
+
+
+    <script type="text/javascript">
+        var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        var word = ["Hello", "Please", "Word", "Weird", "Shoot", "Mother", "Cuphead", "Wolfenstein", "Fallout", "Klavkavash"];
+        var randomWord = word[Math.floor(Math.random() * word.length)];
+        //var hangmanASCII = ["|","|","O","|","|","/","\\"];
+        var btn;
+        var t;
+        var dash;
+        var gameOver = 0;
+        var text;
+        var correct = false;
+        var correctGuesses = 0;
+        for (var k = 0; k < randomWord.length; k++) {
+            dash = document.createElement("B");
+            t = document.createTextNode(" __ ");
+            dash.appendChild(t);
+            document.body.appendChild(dash);
+            dash.id = k;
+        }
+
+        document.body.appendChild(document.createElement("BR"));
+        document.body.appendChild(document.createElement("BR"));
+        text = document.createElement("P");
+        t = document.createTextNode("Misses: 0/7");
+        text.appendChild(t);
+        document.body.appendChild(text);
+        text.style = "font-weight: bold";
+        text.id = "misses";
+        for (var i = 0; i < alphabet.length; i++) {
+            btn = document.createElement("BUTTON");
+            t = document.createTextNode("" + alphabet[i] + "");
+            btn.appendChild(t);
+            document.body.appendChild(btn);
+            btn.id = alphabet[i];
+            btn.class = "letters";
+            btn.onclick = changeVisibility;
+        }
+
+        function changeVisibility() {
+            this.style.visibility = "hidden";
+            checkLetter(this.id);
+        }
+        function checkLetter(letterPressed) {
+
+            for (letter in randomWord) {
+                if (letterPressed == randomWord[letter].toUpperCase()) {
+                    console.log(letter);
+                    document.getElementById(letter.toString()).innerHTML = " " + letterPressed + " ";
+                    correct = true;
+                    correctGuesses++;
+
+                }
+            }
+            if (correct === false) {
+                gameOver++;
+                document.getElementById("misses").innerHTML = "Misses: " + gameOver + "/7";
+                if (gameOver <= 6)
+                    document.getElementById("hangman" + gameOver).style.visibility = "visible";
+                if (gameOver == 7) {
+                    text = document.createElement("P");
+                    t = document.createTextNode("You Dead. Correct word was '" + randomWord + "'. Click Start New Game or leave with failure");
+                    text.appendChild(t);
+                    document.body.appendChild(text);
+                    text.style = "font-weight: bold";
+                    document.getElementById("hangman" + (gameOver - 1)).innerHTML += "\\";
+                    document.getElementById("hangman" + (gameOver - 1)).style.visibility = "visible";
+                    destroyAllFunctionality();
+                }
+            }
+            if (correctGuesses == randomWord.length) {
+                text = document.createElement("P");
+                t = document.createTextNode("You Win! Click Start New Game to play again");
+                text.appendChild(t);
+                document.body.appendChild(text);
+                text.style = "font-weight: bold";
+                destroyAllFunctionality();
+            }
+            correct = false;
+        }
+        function destroyAllFunctionality() {
+            var disable;
+            for (var i = 0; i < alphabet.length; i++) {
+                document.getElementById(alphabet[i]).onclick = null;
+
+            }
+        }
+    </script>
+    <br />
+    <br />
+    <button class="Reset" onclick="location.reload()">Start New Game</button>
+</body>
+
+</html>
