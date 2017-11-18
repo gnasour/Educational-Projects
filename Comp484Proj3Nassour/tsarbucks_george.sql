@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 18, 2017 at 05:36 AM
+-- Generation Time: Nov 18, 2017 at 05:58 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `tsarbucks`
 --
+CREATE DATABASE IF NOT EXISTS `tsarbucks` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `tsarbucks`;
 
 -- --------------------------------------------------------
 
