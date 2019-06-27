@@ -6,7 +6,7 @@
 #define MAX_TEMP 100
 
 void calculateTemp(int);
-float tempFormula(float);
+float tempFormula(int);
 void printTable(float*,int);
 
 int main(int argc, char**argv){
@@ -26,16 +26,18 @@ void calculateTemp(int print_rows){
   printTable(temperatures, print_rows);
 }
 
-float tempFormula(float celcius){
-  return ((celcius*9/5.0)+32);
+float tempFormula(int celcius){
+  return (float)((celcius*9/5.0)+32);
 }
 
 void printTable(float* temperatures, int tempLen){
-printf("==============\n");
-printf("|");
-printf("            |\n");
-for(int i = 0; i < tempLen*2; i+=2){
-  printf("|%.0f\t%.0f|\n",temperatures[i],temperatures[i+1]);
-}
-free(temperatures);
+  printf("\n    Temperature\n");
+  printf("==================\n");
+  printf("|  C");
+  printf("    |   F    |\n");
+  printf("------------------\n");
+  for(int i = 0; i < tempLen*2; i+=2){
+    printf("|%6.2f | %6.2f |\n",temperatures[i],temperatures[i+1]);
+  }
+  free(temperatures);
 }
