@@ -1,12 +1,25 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAXLENGTH 10 //Max length of 1000 characters and 1000 word lengths
+#define MAXLENGTH 1000 //Max length of 1000 characters and 1000 word lengths
 
 void print_histogram(int *word_lengths, int word_lengths_index_size)
 {
-    for (int i = 0; i < word_lengths_index_size; i++)
+    //printf("%d\n", word_lengths_index_size);
+    
+    //Clean the screen to present the histogram
+    system("cls");
+    printf("\n");
+
+    printf("-----------------\n");
+    for (int i = 1; i <= word_lengths_index_size; i++)
     {
-        printf("%d ", word_lengths[i]);
+        printf("| %d |", word_lengths[i]);
+        for(int j = 0; j < word_lengths[i]; j++){
+            printf(" *");
+        }
+        printf("\n");
+        printf("-----------------\n");
     }
 }
 
