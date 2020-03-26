@@ -5,13 +5,24 @@
 
 void print_histogram(int *word_lengths, int word_lengths_index_size)
 {
+    int format_dashes = 0;
     //printf("%d\n", word_lengths_index_size);
 
     //Clean the screen to present the histogram
     system("cls");
     printf("\n");
 
-    printf("-----------------\n");
+    for (int i = 1; i <= word_lengths_index_size; i++)
+    {
+        if (format_dashes < word_lengths[i])
+            format_dashes = word_lengths[i];
+    }
+    printf("-----");
+    for (int i = 0; i < format_dashes; i++)
+    {
+        printf("---");
+    }
+    printf("\n");
     for (int i = 1; i <= word_lengths_index_size; i++)
     {
         printf("| %d |", word_lengths[i]);
@@ -20,7 +31,11 @@ void print_histogram(int *word_lengths, int word_lengths_index_size)
             printf(" *");
         }
         printf("\n");
-        printf("-----------------\n");
+        for (int j = 0; j < format_dashes; j++)
+        {
+            printf("---");
+        }
+        printf("\n");
     }
 }
 
