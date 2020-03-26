@@ -6,7 +6,7 @@
 void print_histogram(int *word_lengths, int word_lengths_index_size)
 {
     //printf("%d\n", word_lengths_index_size);
-    
+
     //Clean the screen to present the histogram
     system("cls");
     printf("\n");
@@ -15,7 +15,8 @@ void print_histogram(int *word_lengths, int word_lengths_index_size)
     for (int i = 1; i <= word_lengths_index_size; i++)
     {
         printf("| %d |", word_lengths[i]);
-        for(int j = 0; j < word_lengths[i]; j++){
+        for (int j = 0; j < word_lengths[i]; j++)
+        {
             printf(" *");
         }
         printf("\n");
