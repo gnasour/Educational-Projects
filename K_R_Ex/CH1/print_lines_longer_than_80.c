@@ -1,21 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-#define MAX_WORD 1000
+#define MAX_LINE 1000
 
 int main(){
-    char array[MAX_WORD];
+    char array[MAX_LINE];
     char c;
     int counter = 0;
-    while((c = getline())!=EOF){
+    while((c = getchar())!=EOF){
         if(c!='\n'){
             array[counter] = c;
             counter++;
         }
         else{
-            if(counter >= 80 && counter < 1000){
+            if(counter > 80 && counter < 1000){
                 array[counter] = '\0';
-                printf("%s", array);
+                printf("%s\n", array);
+                memset(array, 0, sizeof(array));
+                counter = 0;
+            }else{
                 memset(array, 0, sizeof(array));
                 counter = 0;
             }
