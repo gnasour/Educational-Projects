@@ -19,7 +19,17 @@ int main()
         }
         else
         {
-            for(int i = 0; i < counter; i++)
+            char temp;
+            int index = counter/2;
+            for(int i = 0; i < index; i++){
+                temp = line[i];
+                line[i] = line[counter-i-1];
+                line[counter-i-1] = temp;
+            }
+            line[counter]='\0';
+            printf("%s\n", line);
+            memset(line, 0, sizeof(line));
+            counter = 0;
         }
         
     }
