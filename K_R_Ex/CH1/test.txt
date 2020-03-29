@@ -1,5 +1,5 @@
-1 tab and 4 spaces         1newline    
-1 new line and 8 spaces with 1 tab  
+1 tab and 4 spaces         1newline                     
+1 new line and 8 spaces with 1 tab              
 5tabs                   
 ^H
 \
