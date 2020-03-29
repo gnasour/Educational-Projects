@@ -28,6 +28,7 @@ int main(){
     char* char_freq_array = calloc(NUM_OF_CHARS, sizeof(char));
     input_characters(char_freq_array);
     print_histogram(char_freq_array);
+    free(char_freq_array);
 }
 
 void input_characters(char* char_freq_array){
