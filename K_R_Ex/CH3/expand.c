@@ -4,7 +4,7 @@
 
 #define BUF_SIZE 512
 
-void expand(char*,char*);
+void expand(char**,char*);
 
 int main(int argc, char* argv[]){
     if(argc != 2){
