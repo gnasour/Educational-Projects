@@ -4,16 +4,16 @@
 
 #define BUF_SIZE 512
 
-void expand(char**,char*);
+void expand(char*, char*);
 
-int main(int argc, char* argv[]){
+int main(int argc, char** argv){
     if(argc != 2){
         fprintf(stderr, "Improper usage, enter a hyphenated series to expand");
         exit(EXIT_FAILURE);
     }
 
-    char* string_buff[BUF_SIZE];
-    expand(argv[1], &string_buff[0]);
+    char string_buff[BUF_SIZE];
+    expand(argv[1], string_buff);
 
     exit(EXIT_SUCCESS);
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
 
 }
 
-void expand(char** s1, char* s2){
+void expand(char* s1, char* s2){
     
     for(int i = 0; i < strlen(s1); i++){
         if(s1[i] == '-'){
