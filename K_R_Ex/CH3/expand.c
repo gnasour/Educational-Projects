@@ -24,7 +24,7 @@ int main(int argc, char** argv){
 void expand(char* s1, char* s2){
     
     for(int i = 0; i < strlen(s1); i++){
-        if(s1[i] == '-'){
+        if(s1[i] == '-' && i > 0){
             for(char j = s1[i-1]; j <= s1[i+1]; j++){
                 printf("%c", j);
             }
