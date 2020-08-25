@@ -1,12 +1,13 @@
 #include <stdio.h>
-#include <string.h>
+
 
 void itob(int, char*, int);
+void strrev(char*);
 
 int main(){
   char string[100];
-  itob(8, string, 2);
-  printf("%s", string);
+  itob(19, string, 2);
+  printf("%s\n", string);
   return 0;
 }
 
@@ -33,3 +34,21 @@ void itob(int n, char* s, int b){
     strrev(s);
 
 }
+void strrev(char* s){
+
+  char temp = 0;
+  int length;
+
+  //Find the length of the string
+  for(length = 0; s[length]!='\0'; length++);
+  //printf("%d\n", length);
+  //Reverse the string
+  int i;
+  for(i = 0; i < length/2; i++){
+    printf("%d %d\n", i, length);
+    temp = s[length - i -1];
+    s[length - i -1]=s[i];
+    s[i]=temp;
+  }
+}
+    
