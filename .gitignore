@@ -2,3 +2,6 @@
 *.exe
 *.json
 *.project
+*
+!*.C
+!Makefile
