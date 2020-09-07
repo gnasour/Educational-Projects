@@ -22,7 +22,7 @@ class MaxPathSum{
       int k = 0;
       while(scanner.hasNext()){
          
-         numLine = new StringTokenizer(scanner.nextLine());
+         numLine = new StringTokenizer(scanner.nextLine(), " ");
          //int[] lineTok = new int[numLine.countTokens()];
             for(int i = 0; i <= numLine.countTokens(); i++){
                //lineTok[i] = Integer.parseInt(numLine.nextToken());
