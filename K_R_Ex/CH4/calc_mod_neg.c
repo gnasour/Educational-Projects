@@ -36,6 +36,13 @@ int main(){
                 else
                     printf("Error: Zero in the divisor\n");
                 break;
+            case '%':
+                op2 = pop();
+                if(op2 != 0)
+                    push((int)pop()%(int)op2);
+                else
+                    printf("Error: Zero in the divisor\n");
+                break;
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
@@ -65,7 +72,7 @@ void push(double f){
 double pop(void){
 
     if(sp > 0){
-        return val[sp--];
+        return val[--sp];
     }else{
         printf("Error: Stack is empty\n");
         return 0.0;
