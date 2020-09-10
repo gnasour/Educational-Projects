@@ -8,7 +8,7 @@ public class CountSundays {
         static boolean leapYear = false;
         static int month = 0;
         //Jan 1901 Starts on a Tuesday
-        static int day = 1;
+        static int day = 2;
         static int numOfFirstSundays = 0;
 
         static String[] days = {"S", "M", "T", "W", "Th", "F", "Sa"};
@@ -17,6 +17,9 @@ public class CountSundays {
 
 
         for(int i = 1901; i < CENTURY+1901; i++){
+            if(i == 2000){
+                System.out.println("Here");
+            }
             if((i % 100 == 0 && i % 400 == 0) || (i % 4 == 0)){
                 leapYear = true;
             }else{
@@ -46,9 +49,13 @@ public class CountSundays {
                     numOfFirstSundays++;
                 }
                 for(int k = 0; k < daysToIterate; k++){
+                    
+                    //Count the next day
                     day++;
-                    if(day == 7)
-                        day = 0;
+
+                    //Week resets on Sunday
+                    day%=7;
+
                     //System.out.println(days[day]);
                 }
             }
