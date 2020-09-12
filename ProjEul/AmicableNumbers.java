@@ -12,7 +12,7 @@ public class AmicableNumbers {
     }
 
     public static int [] findDivisors(int num){
-
+        return null;
     }
 
     public int findSum(int [] divisors){
