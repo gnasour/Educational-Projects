@@ -18,7 +18,8 @@ static char daytab[2][13] = {
 
 int day_of_year(int year, int month, int day){
     int i, leap;
-
+    if(year < 0 || month < 0 || day < 0)
+        printf("Error: Must be non-negative number");
     leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
     for(i = 1; i < month; i++){
         day += *(*(daytab + leap)+i);
