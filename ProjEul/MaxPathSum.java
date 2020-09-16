@@ -65,13 +65,16 @@ class MaxPathSum{
          
       }   
 
+      int max = 0;
       for(int i = 0; i < dynamic_num[0].length; i++){
  
-         System.out.print(dynamic_num[dynamic_num.length-1][i] + " ");
+         if(max < dynamic_num[dynamic_num.length-1][i]) {
+        	 max = dynamic_num[dynamic_num.length-1][i];
+         }
  
       }
 
-      System.out.println();
+      System.out.println(max);
 
    
    }
