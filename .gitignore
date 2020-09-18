@@ -4,3 +4,9 @@
 *.json
 *.project
 *.class
+*.iml
+.idea
+.vscode
+.vs
+out
+.classpath
