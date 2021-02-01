@@ -13,6 +13,7 @@ class NonAbundantSums{
         int result = 0;
         for(int i = 2; i <= MAX_ABUNDANT_SUM; i++){
             if(AmicableNumbers.findSum(AmicableNumbers.findDivisors(i)) > i){
+                //System.out.println(i);
                 setOfAbundantSum.add(i);
             }
         }//                if(result == 4179871){
@@ -24,7 +25,7 @@ class NonAbundantSums{
         boolean toAdd = true;
         //setOfAbundantSumArray[setOfAbundantSumArray.length-1]=99999;
         for(int i = 25; i < MAX_ABUNDANT_SUM; i++){
-            for(int j = 0; setOfAbundantSumArray[j] < i; j++){
+            for(int j = 1; setOfAbundantSumArray[j] < i; j++){
 
                 if(setOfAbundantSum.contains(i-setOfAbundantSumArray[j])){
                     toAdd = false;
@@ -33,15 +34,18 @@ class NonAbundantSums{
             }
             if(toAdd){
                 result += i;
+                //System.out.println(result);
+
             }else{
                 toAdd = true;
             }
-            if(result == 4190128){
+            if(result == 4179871){
                 System.out.println("Here");
             }
         }
         timeEnd = System.currentTimeMillis();
         System.out.println(result);
+        System.out.println(timeEnd - timeStart);
 
     }
 }
