@@ -14,7 +14,7 @@ class NameScores{
     public static void main(String [] args){
         
         Scanner scanner = null;
-        String fileName = "p022_names.txt";
+        String fileName = "ProjEul/p022_names.txt";
         PriorityQueue pq = new PriorityQueue(5000);
         long result = 0;
         Path file = FileSystems.getDefault().getPath(".", fileName);
