@@ -34,7 +34,7 @@ int main()
 
     //  Print the histogram
     printf("Word Length Histogram\n");
-    printf("---------------------\n");
+    printf("----------------------\n");
     for(int i = 0; i < MAX_WORD_LEN; i++){
         
         printf("%d:\t", i+1);
