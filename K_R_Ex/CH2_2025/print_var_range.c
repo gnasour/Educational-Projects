@@ -10,6 +10,13 @@ int main()
     int i;
     long l;
 
+    //Unsigned integral types
+    unsigned char c;
+    unsigned short s;
+    unsigned int i;
+    unsigned long l;
+
+
     // Floating point types
     float f;
     double d;
