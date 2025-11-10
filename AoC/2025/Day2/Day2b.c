@@ -1,30 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-// Arguments: A line of data to tokenize into integers, delimited by spaces
-// Returns: a pointer to an array of positive integers. -1 is used to signal end of array
-int* data_tok(char* line){
-    
-    
-    // Array of int data to return
-    int* num_arr = (int*) malloc(10*sizeof(int));
-    // Index of array
-    int num_in_line = 0;
-
-    // Line of text to tokenize
-    char* line_tok = strtok(line, " ");
-
-    while(line_tok != NULL){
-        num_arr[num_in_line] = atoi(line_tok);
-        num_in_line++;
-        line_tok = strtok(NULL, " ");
-    }
-    
-    num_arr[num_in_line] = -1;
-
-    return num_arr;
-}
+#include "../helpers.h"
 
 // Function checks whether the two numbers in sequence are increasing or decreasing
 // Returns 2 if increasing, 1 if decreasing, and 0 if the same
@@ -74,25 +48,24 @@ int main()
             int diff = abs(num_arr[i] - num_arr[i+1]);
 
             if(monotonicity == 0){
-                safe = 0;
-                break;
+                bad_val++;
             }
             else if(monotonicity == 2){
                 increasing++;
             }
-            else{
+            else if(monotonicity == 1){
                 decreasing++;
             }
+
             if(increasing > 1 && decreasing > 1){
                 safe = 0;
                 break;
             }
+            
             if(diff > 3){
                 bad_val++;
             }
 
-
-            
             if(bad_val > 1){
                 safe = 0;
                 break;
@@ -107,7 +80,6 @@ int main()
         if(safe){
             safe_lines++;
         }
-        safe = 1;
         free(num_arr);
     }
 
