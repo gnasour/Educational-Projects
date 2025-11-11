@@ -1,6 +1,6 @@
 #include "../helpers.h"
 
-
+int state = 1;
 
 int process_line(char* line)
 {
@@ -24,10 +24,11 @@ int process_line(char* line)
         if(comma_pos == NULL || len > 3 || len == 0)
             continue;
         else{
-            char a_num[len];
+            char a_num[len+1];  // C strings have a terminating null character at the end
             for(int i = 0; i < len; i++){
                 a_num[i] = *(line+i);
             }
+            a_num[len]='\0';
             num1 = atoi(a_num);
         }
 
@@ -40,10 +41,11 @@ int process_line(char* line)
         if(paren_pos == NULL || len > 3 || len == 0)
             continue;
         else{
-            char a_num[len];
+            char a_num[len+1];
             for(int i = 0; i < len; i++){
                 a_num[i] = *(line+i);
             }
+            a_num[len]='\0';
             num2 = atoi(a_num);
         }
         
@@ -53,16 +55,24 @@ int process_line(char* line)
     return line_tot;
 }
 
+int find_enable_parts(char* line)
+{
+    
+}
+
 int main()
 {
     FILE* day3data = fopen("Day3.txt", "r");
     size_t num_bytes;
     char* line;
+    char* do_line; // Strings that have mul enabled
 
     int tot=0;
 
     while(getline(&line, &num_bytes, day3data) != -1){
-        tot += process_line(line);
+        while(do_line=find_enable_parts(line)){
+            tot += process_line(do_line);
+        }
     }
 
     printf("total: %d\n", tot);
