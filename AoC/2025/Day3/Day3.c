@@ -10,7 +10,7 @@ int process_line(char* line)
     // This ensures that we march along the entire string
     int line_tot = 0;
     while(line = strstr(line, init_pattern)){
-
+        
         int num1, num2;
         int len;
         char* comma_pos;
@@ -55,9 +55,16 @@ int process_line(char* line)
     return line_tot;
 }
 
-int find_enable_parts(char* line)
+char* find_enable_parts(char* line)
 {
-    
+    const static char* dont_text = "don't()";
+    const static char* do_txt = "do()";
+
+    char* next_dont = strstr(line, dont_text);
+
+    if((next_dont - line) == 0){
+         
+    }
 }
 
 int main()
@@ -72,6 +79,7 @@ int main()
     while(getline(&line, &num_bytes, day3data) != -1){
         while(do_line=find_enable_parts(line)){
             tot += process_line(do_line);
+            line += strlen(do_line);
         }
     }
 
