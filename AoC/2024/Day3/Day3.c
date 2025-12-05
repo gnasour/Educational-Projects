@@ -62,8 +62,8 @@ char* find_enable_parts(char* line)
 
     char* next_dont = strstr(line, dont_text);
 
-    if((next_dont - line) == 0){
-         
+    if(state){
+        
     }
 }
 
