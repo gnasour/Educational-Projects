@@ -20,27 +20,32 @@ int main()
             i++;
         rotations[i] = '\0';
 
+        // If num_of_rotations is >= 100, divide by 100 to get extra 0 counts, then calculate how many rotations are left over and yet to be made
+        int num_of_rotations;
+        num_of_rotations = atoi(rotations);
+        if(num_of_rotations >= 100){
+            zero_count += num_of_rotations/100;
+            num_of_rotations = num_of_rotations - (num_of_rotations/100)*100;
+        }
+
+
         // Calculate position
-        int rotated_zero = 0;
         if(dir == 'R'){
-            dial += atoi(rotations);
-            while(dial >= 100){
-                dial -= 100;
+            dial += num_of_rotations;
+            if(dial >= 100){
+                dial-=100;
                 zero_count++;
-                rotated_zero = 1;
             }
         }
         else{
-            dial -= atoi(rotations);
-            while(dial < 0){
-                dial += 100;
+            dial -= num_of_rotations;
+            if(dial < 0){
+                dial+=100;
                 zero_count++;
-                rotated_zero = 1;
             }
-        }
-
-        if(dial == 0 && !rotated_zero){
-            zero_count++;
+            else if(dial == 0){
+                zero_count++;
+            }
         }
         
 
