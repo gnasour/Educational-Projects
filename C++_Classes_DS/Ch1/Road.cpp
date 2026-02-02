@@ -1,25 +1,35 @@
 #include "Road.hpp"
 
+
+Road::Road()
+{
+}
+
+Road::Road(double width_ft, double length_mi)
+{
+    width = width_ft;
+    length = length_mi;
+}
+
 void Road::set_width(double width_ft)
 {
-    this->width = width_ft;
+    width = width_ft;
 }
 
 void Road::set_length(double length_mi)
 {
-    this->length = length_mi;
+    length = length_mi;
 }
 
-double Road::get_length()
+double Road::get_length() const
 {
     return length;
 }
 
-double Road::get_width()
+double Road::get_width() const
 {
     return width;
 }
-
 
 // Computes the cubic feet of asphalt required to build the road
 // Length is measured in miles so a conversion factor is used to change the unit to feet (1mi/5280ft)

@@ -1,4 +1,15 @@
+template <class DataType>
+Rectangle<DataType>::Rectangle()
+{
 
+}
+
+template <class DataType>
+Rectangle<DataType>::Rectangle(DataType length, DataType width)
+{
+    this->length = length;
+    this->width = width;
+}
 
 
 template <class DataType>
@@ -21,7 +32,7 @@ bool Rectangle<DataType>::cmpSides()
 }
 
 template <class DataType>
-DataType Rectangle<DataType>::calcPerimeter()
+DataType Rectangle<DataType>::calcPerimeter() 
 {
     DataType temp_length = length * 2;
     DataType temp_width = width * 2;
@@ -29,7 +40,7 @@ DataType Rectangle<DataType>::calcPerimeter()
 }
 
 template <class DataType>
-DataType Rectangle<DataType>::calcArea()
+DataType Rectangle<DataType>::calcArea() 
 {
     return length*width;
 }
