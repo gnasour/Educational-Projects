@@ -8,6 +8,16 @@ class ServerGroup
      
 public:
     ServerGroup(int size);
+
+    // Copy constructor
+    ServerGroup(const ServerGroup & orig);
+
+    // Destructor
+    ~ServerGroup();
+
+    // Assignment overload operator
+    ServerGroup & operator=(const ServerGroup & right);
+
     int getSize() const;
     int getServer(int index) const;
     bool spServerFree() const;
@@ -21,6 +31,7 @@ private:
     int spServer;
     int freeServer;
     int size;
+    inline void deepCopy(const ServerGroup & orig);
 };
 
 #endif
