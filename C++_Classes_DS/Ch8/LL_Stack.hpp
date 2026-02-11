@@ -6,7 +6,7 @@ template <class DataType>
 struct Node
 {
     DataType val;
-    Node *next;
+    Node<DataType> *next;
 };
 
 template <class DataType>
