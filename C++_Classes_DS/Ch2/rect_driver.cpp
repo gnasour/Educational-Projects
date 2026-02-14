@@ -5,7 +5,7 @@ struct Fraction{
 
     float numerator, denominator;
 
-    Fraction operator +(Fraction & frac){
+    Fraction operator+(Fraction & frac){
 
         if(denominator != frac.denominator){
 

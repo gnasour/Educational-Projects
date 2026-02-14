@@ -3,8 +3,7 @@
 template <class DataType>
 LL_Stack<DataType>::LL_Stack()
 {
-    top = new Node<DataType>;
-    top->next = NULL;
+
 }
 
 
@@ -17,13 +16,18 @@ LL_Stack<DataType>::LL_Stack(const LL_Stack<DataType> & rval)
 template <class DataType>
 LL_Stack<DataType> & LL_Stack<DataType>::operator=(const LL_Stack<DataType> & rval)
 {
+    if(this==rval)
+        return *this;
+    makeEmpty();
     deepCopy(rval);
+    return *this;
 }
 
 template <class DataType>
 LL_Stack<DataType>::~LL_Stack()
 {
     std::cout << "destructor called" << std::endl;
+    makeEmpty();
 }
 
 template <class DataType>
@@ -62,7 +66,7 @@ bool LL_Stack<DataType>::peek(DataType & peekedElem)
 }
 
 template <class DataType>
-bool LL_Stack<DataType>::isEmpty()
+bool LL_Stack<DataType>::isEmpty() const
 {
     if(top == NULL)
         return true;
@@ -73,5 +77,11 @@ bool LL_Stack<DataType>::isEmpty()
 template <class DataType>
 void LL_Stack<DataType>::makeEmpty()
 {
+    while(top->next){
+        Node<DataType> *temp = top;
+        top = top->next;
+        delete temp;
+    }
 
+    delete top;
 }

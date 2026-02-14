@@ -1,5 +1,6 @@
 #include "Shape.hpp"
 #include "Triangle.hpp"
+#include <iostream>
 
 Triangle::Triangle(float base, float height)
 : Shape(), base(base), height(height)
@@ -15,5 +16,6 @@ float Triangle::calcArea()
 
 int main()
 {
-    Shape s = new Triangle(2,3);
+    Shape *s = new Triangle(2,3);
+    std::cout << s->calcArea() << std::endl;
 }
