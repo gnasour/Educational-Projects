@@ -18,6 +18,7 @@ LL_Stack<DataType> & LL_Stack<DataType>::operator=(const LL_Stack<DataType> & rv
 {
     if(this==rval)
         return *this;
+
     makeEmpty();
     deepCopy(rval);
     return *this;

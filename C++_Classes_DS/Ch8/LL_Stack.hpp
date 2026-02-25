@@ -1,6 +1,7 @@
 #ifndef LL_STACK_HPP
 #define LL_STACK_HPP
 
+#include "Abst_Stack.hpp"
 
 template <class DataType>
 struct Node

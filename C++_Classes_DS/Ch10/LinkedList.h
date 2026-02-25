@@ -50,5 +50,56 @@ LinkedList<T>::LinkedList(const LinkedList<T> & ap)
     deepCopy(ap);
 }
 
+template <class T>
+LinkedList<T>::~LinkedList()
+{
+    Node<T> *temp;
+    while(start->next != nullptr){
+        temp = start;
+        start = start->next;
+        delete temp;
+    }
+    
+    delete start;
+}
+
+template <class T>
+LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rval)
+{
+    if(rval == *this)
+        return *this;
+        
+    makeEmpty();
+    deepCopy(rval);
+    return *this;
+}
+
+template <class T>
+void LinkedList<T>::insert(const T & elem)
+{
+    Node<T> *newNode = new Node<T>;
+    newNode->data = elem;
+    newNode->next = nullptr;
+
+    Node<T> *temp;
+    if(current != nullptr){
+        temp = current;
+    }
+    else{
+        temp = start;
+    }
+
+    while(temp->next != nullptr){
+        temp = temp->next;
+    }
+    temp->next = newNode;
+
+}
+
+template <class T>
+bool LinkedList<T>::first(T & elem)
+{
+    return start->data;
+}
 
 #endif
