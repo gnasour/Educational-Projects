@@ -40,8 +40,7 @@ private:
 template <class T>
 LinkedList<T>::LinkedList()
 {
-    start = new Node<T>;
-    start->next = nullptr;
+    start = current = nullptr;
 }
 
 template <class T>
@@ -52,6 +51,23 @@ LinkedList<T>::LinkedList(const LinkedList<T> & ap)
 
 template <class T>
 LinkedList<T>::~LinkedList()
+{
+    makeEmpty();
+}
+
+template <class T>
+LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rval)
+{
+    if(this == &rval)
+        return *this;
+        
+    makeEmpty();
+    deepCopy(rval);
+    return *this;
+}
+
+template <class T>
+LinkedList<T>::makeEmpty()
 {
     Node<T> *temp;
     while(start->next != nullptr){
@@ -64,42 +80,28 @@ LinkedList<T>::~LinkedList()
 }
 
 template <class T>
-LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rval)
-{
-    if(rval == *this)
-        return *this;
-        
-    makeEmpty();
-    deepCopy(rval);
-    return *this;
-}
-
-template <class T>
 void LinkedList<T>::insert(const T & elem)
 {
+    current = nullptr;
+
     Node<T> *newNode = new Node<T>;
     newNode->data = elem;
-    newNode->next = nullptr;
+    newNode->next = start;
 
-    Node<T> *temp;
-    if(current != nullptr){
-        temp = current;
-    }
-    else{
-        temp = start;
-    }
-
-    while(temp->next != nullptr){
-        temp = temp->next;
-    }
-    temp->next = newNode;
+    start = newNode;
 
 }
 
 template <class T>
 bool LinkedList<T>::first(T & elem)
 {
-    return start->data;
+    if(start == nullptr)
+        return false;
+    
+    current = start;
+    elem = start->data;
+    return true;
+
 }
 
 #endif
