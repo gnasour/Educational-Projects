@@ -67,16 +67,48 @@ LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rval)
 }
 
 template <class T>
-LinkedList<T>::makeEmpty()
+inline void LinkedList<T>::deepCopy(const LinkedList<T> & original)
 {
-    Node<T> *temp;
-    while(start->next != nullptr){
-        temp = start;
+    start = current = nullptr;
+
+    if(original.start == nullptr)
+        return;
+    
+    Node<T> *copyPtr = start = new Node<T>;
+    Node<T> *originalPtr = original.start;
+    copyPtr->data = originalPtr->data;
+
+    if(originalPtr == original.current)
+        current = copyPtr;
+    
+    while(originalPtr->next != nullptr){
+
+        originalPtr = originalPtr->next;
+        copyPtr->next = new Node<T>;
+        copyPtr = copyPtr->next;
+        copyPtr->data = originalPtr->data;
+
+        if(originalPtr == original.current){
+            current = copyPtr;
+        }
+            
+    }
+
+    copyPtr->next = nullptr;
+    
+}
+
+template <class T>
+void LinkedList<T>::makeEmpty()
+{
+    while(start != nullptr){
+        current = start;
         start = start->next;
-        delete temp;
+        delete current;
     }
     
-    delete start;
+    current = nullptr;
+
 }
 
 template <class T>
@@ -197,7 +229,12 @@ bool LinkedList<T>::remove(T & elem)
 
     return false;
 
+}
 
+template <class T>
+bool LinkedList<T>::isEmpty()
+{
+    return start == nullptr;
 }
 
 #endif
