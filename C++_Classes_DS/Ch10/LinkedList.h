@@ -95,7 +95,7 @@ inline void LinkedList<T>::deepCopy(const LinkedList<T> & original)
     }
 
     copyPtr->next = nullptr;
-    
+
 }
 
 template <class T>
@@ -232,7 +232,7 @@ bool LinkedList<T>::remove(T & elem)
 }
 
 template <class T>
-bool LinkedList<T>::isEmpty()
+bool LinkedList<T>::isEmpty() const
 {
     return start == nullptr;
 }
