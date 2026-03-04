@@ -104,4 +104,100 @@ bool LinkedList<T>::first(T & elem)
 
 }
 
+template <class T>
+inline bool LinkedList<T>::getNext(T & elem)
+{
+    if(current == nullptr)
+        return false;
+    if(current->next == nullptr){
+        current = nullptr;
+        return false;
+    }
+
+    current = current->next;
+    elem = current->data;
+    return true;
+
+}
+
+template <class T>
+bool LinkedList<T>::find(const T & elem)
+{
+    T item;
+
+    if(!first(item)){
+        return false;
+
+    }
+
+    do{
+        if(item == elem){
+            return true;
+        }
+
+    }while(getNext(item));
+
+    return false;
+
+
+}
+
+template <class T>
+bool LinkedList<T>::retrieve(T & elem)
+{
+    if(!find(elem))
+        return false;
+    
+
+    // Test to see if code works without the following line (I expect its redundent)
+    //element = current->data;
+    return true;
+
+}
+
+template <class T>
+bool LinkedList<T>::replace(const T & newElem)
+{
+    if(current == nullptr)
+        return false;
+    
+    current->data = newElem;
+    return true;
+
+}
+
+template <class T>
+bool LinkedList<T>::remove(T & elem)
+{
+    current = nullptr;
+
+    if(start == nullptr)
+        return false;
+    
+    Node<T> *ptr = start;
+
+    if(ptr->data == elem){
+        // Again, might be redundent
+        //elem = ptr->data;
+        start = start->next;
+        delete ptr;
+        return true;
+    }
+
+    while(ptr->next != nullptr){
+        if(ptr->next->data == elem){
+            Node<T> *temp = ptr->next;
+            //elem = temp->data;
+            ptr->next = temp->next;
+            delete temp;
+            return true;
+        }
+        ptr = ptr->next;
+    }
+
+    return false;
+
+
+}
+
 #endif
