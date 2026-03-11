@@ -1,8 +1,8 @@
 #ifndef DYNAMIC_STACK_HPP
 #define DYNAMIC_STACK_HPP
 
-
-#include "Abst_Stack.hpp"
+#include "LL_Stack.hpp"
+#include "Array_Stack.hpp"
 
 
 template <class DataType>
@@ -13,9 +13,7 @@ public:
 
 private:
     Abst_Stack *abst_st;
-    // DS_Node<DataType> *head;
-    // Array<DataType> *arr;
-    // int top;
+
 };
 
 template <class DataType>
