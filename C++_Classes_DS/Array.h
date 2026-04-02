@@ -18,13 +18,13 @@ public:
     inline int length() const;
 
 private:
+    inline void deepCopy(const Array<DataType> & ap);
+    
     DataType *elements;
     int capacity;
     DataType dud;
-    inline void deepCopy(const Array<DataType> & ap);
-
+    
 };
-
 
 
 template <class DataType>
@@ -48,8 +48,9 @@ Array<DataType>::Array(const Array<DataType> & rval)
 template <class DataType>
 Array<DataType> & Array<DataType>::operator=(const Array<DataType> & rval)
 {
-    if(this == rval)
+    if(this == &rval){
         return *this;
+    }
     
     delete [] elements;
     deepCopy(rval);

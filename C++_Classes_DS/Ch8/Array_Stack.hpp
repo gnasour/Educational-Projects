@@ -8,10 +8,10 @@ template <class DataType>
 class Array_Stack : public Abst_Stack
 {
 public:
-
     Array_Stack();
-    Array_Stack(DataType & )
+    Array_Stack(const Array_Stack<DataType> & original);
     ~Array_Stack();
+    Array_Stack<DataType> & operator=(const Array_Stack<DataType> & rval);
 
     virtual void push(DataType elem);
     virtual bool pop(DataType & poppedElem);
@@ -20,9 +20,9 @@ public:
     virtual void makeEmpty();
 
 private:
-
     void testToShrink();   // These two functions dynamically change the length of the array
     void testToGrow();     // depending on a constant factor of the ratio (top/elements.length())
+    inline void deepCopy(const Array_Stack<DataType> & ap);
 
     Array<DataType> *elements;
     int top;
@@ -31,9 +31,41 @@ private:
 
 template <class DataType>
 Array_Stack<DataType>::Array_Stack()
-    : elements(2), top(-1)
 {
+    elements = new Array<DataType>(2);
+    top = -1;
+}
 
+template <class DataType>
+Array_Stack<DataType>::Array_Stack(const Array_Stack<DataType> & original)
+{
+    deepCopy(original);
+}
+
+template <class DataType>
+Array_Stack<DataType>::~Array_Stack()
+{
+    delete elements;
+}
+
+template <class DataType>
+Array_Stack<DataType> & Array_Stack<DataType>::operator=(const Array_Stack<DataType> & rval)
+{
+    if(this == &rval){
+        return *this;
+    }
+
+    delete elements;
+    deepCopy(rval);
+
+    return *this;
+}
+
+template <class DataType>
+inline void Array_Stack<DataType>::deepCopy(const Array_Stack<DataType> & ap)
+{
+    top = ap.top;
+    elements = ap.elements;
 }
 
 template <class DataType>
