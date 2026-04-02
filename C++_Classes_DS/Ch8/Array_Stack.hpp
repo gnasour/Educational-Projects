@@ -5,7 +5,7 @@
 #include "../Array.h"
 
 template <class DataType>
-class Array_Stack : public Abst_Stack
+class Array_Stack : public Abst_Stack<DataType>
 {
 public:
     Array_Stack();
@@ -71,22 +71,22 @@ inline void Array_Stack<DataType>::deepCopy(const Array_Stack<DataType> & ap)
 template <class DataType>
 void Array_Stack<DataType>::testToGrow()
 {
-    if(++top == elements.length()){
-        elements.changeSize(elements.length()<<1); // Double the capacity each time the array is full
+    if(++top == elements->length()){
+        elements->changeSize(elements->length()<<1); // Double the capacity each time the array is full
     }
 }
 
 template <class DataType>
 void Array_Stack<DataType>::testToShrink()
 {
-    int trySize = elements.length();
+    int trySize = elements->length();
     while( ((top+1) <= (trySize >> 2)) && trySize > 2){
         trySize >>= 1;
     }
 
-    if(trySize < elements.length()){
+    if(trySize < elements->length()){
         try{
-            elements.changeSize(trySize);
+            elements->changeSize(trySize);
         }
         catch(...){}
     }
@@ -98,7 +98,7 @@ void Array_Stack<DataType>::push(DataType elem)
 {
     testToGrow();
 
-    elements[top] = elem;
+    (*elements)[top] = elem;
 }
 
 template <class DataType>
@@ -108,7 +108,7 @@ bool Array_Stack<DataType>::pop(DataType & poppedElem)
         return false;
     }
 
-    poppedElem = elements[top];
+    poppedElem = (*elements)[top];
     top--;
 
     testToShrink();
@@ -123,7 +123,7 @@ bool Array_Stack<DataType>::peek(DataType & topElem)
         return false;
     }
 
-    topElem = elements[top];
+    topElem = (*elements)[top];
 
     return true;
 }
