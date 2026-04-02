@@ -10,6 +10,8 @@ class Array_Stack : public Abst_Stack
 public:
 
     Array_Stack();
+    Array_Stack(DataType & )
+    ~Array_Stack();
 
     virtual void push(DataType elem);
     virtual bool pop(DataType & poppedElem);
@@ -18,8 +20,13 @@ public:
     virtual void makeEmpty();
 
 private:
-    Array<DataType> elements;
+
+    void testToShrink();   // These two functions dynamically change the length of the array
+    void testToGrow();     // depending on a constant factor of the ratio (top/elements.length())
+
+    Array<DataType> *elements;
     int top;
+
 };
 
 template <class DataType>
@@ -30,9 +37,76 @@ Array_Stack<DataType>::Array_Stack()
 }
 
 template <class DataType>
+void Array_Stack<DataType>::testToGrow()
+{
+    if(++top == elements.length()){
+        elements.changeSize(elements.length()<<1); // Double the capacity each time the array is full
+    }
+}
+
+template <class DataType>
+void Array_Stack<DataType>::testToShrink()
+{
+    int trySize = elements.length();
+    while( ((top+1) <= (trySize >> 2)) && trySize > 2){
+        trySize >>= 1;
+    }
+
+    if(trySize < elements.length()){
+        try{
+            elements.changeSize(trySize);
+        }
+        catch(...){}
+    }
+    
+}
+
+template <class DataType>
 void Array_Stack<DataType>::push(DataType elem)
 {
-    
+    testToGrow();
+
+    elements[top] = elem;
+}
+
+template <class DataType>
+bool Array_Stack<DataType>::pop(DataType & poppedElem)
+{
+    if(top == -1){
+        return false;
+    }
+
+    poppedElem = elements[top];
+    top--;
+
+    testToShrink();
+
+    return true;
+}
+
+template <class DataType>
+bool Array_Stack<DataType>::peek(DataType & topElem)
+{
+    if(top == -1){
+        return false;
+    }
+
+    topElem = elements[top];
+
+    return true;
+}
+
+template <class DataType>
+bool Array_Stack<DataType>::isEmpty() const
+{
+    return top == -1;
+}
+
+template <class DataType>
+void Array_Stack<DataType>::makeEmpty()
+{
+    delete elements;
+    top = -1; 
 }
 
 
