@@ -127,11 +127,13 @@ void LinkedList<T>::insert(const T & elem)
 template <class T>
 bool LinkedList<T>::first(T & elem)
 {
-    if(start == nullptr)
+    if(start == nullptr){
         return false;
-    
+    }
+
     current = start;
     elem = start->data;
+    
     return true;
 
 }
@@ -148,8 +150,8 @@ inline bool LinkedList<T>::getNext(T & elem)
 
     current = current->next;
     elem = current->data;
+    
     return true;
-
 }
 
 template <class T>
@@ -170,32 +172,30 @@ bool LinkedList<T>::find(const T & elem)
     }while(getNext(item));
 
     return false;
-
-
 }
 
 template <class T>
 bool LinkedList<T>::retrieve(T & elem)
 {
-    if(!find(elem))
+    if(!find(elem)){
         return false;
+    }
     
-
     // Test to see if code works without the following line (I expect its redundent)
-    //element = current->data;
+    elem = current->data;
     return true;
-
 }
 
 template <class T>
 bool LinkedList<T>::replace(const T & newElem)
 {
-    if(current == nullptr)
+    if(current == nullptr){
         return false;
-    
-    current->data = newElem;
-    return true;
+    }
 
+    current->data = newElem;
+
+    return true;
 }
 
 template <class T>
@@ -203,13 +203,14 @@ bool LinkedList<T>::remove(T & elem)
 {
     current = nullptr;
 
-    if(start == nullptr)
+    if(start == nullptr){
         return false;
+    }
     
     Node<T> *ptr = start;
 
     if(ptr->data == elem){
-        // Again, might be redundent
+        // Might be redundent
         //elem = ptr->data;
         start = start->next;
         delete ptr;
@@ -228,7 +229,6 @@ bool LinkedList<T>::remove(T & elem)
     }
 
     return false;
-
 }
 
 template <class T>
