@@ -3,32 +3,32 @@
 #include <vector>
 #include <cstdlib>
 
-using namespace std;
-
-Token get_token();
+Token_Stream ts;
 double expression();
 double term();
 double primary();
-vector<Token> tok;
+std::vector<Token> tok;
 
 double expression()
 {
     double left = term();
-    Token t = get_token();
+    Token t = ts.get();
     while (true)
     {
         switch (t.kind)
         {
         case '+':
             left += term();
-            t = get_token();
+            t = ts.get();
             break;
         case '-':
             left -= term();
-            t = get_token();
+            t = ts.get();
             break;
         default:
+            ts.putback(t);
             return left;
+            break;
         }
     }
 }
@@ -36,55 +36,57 @@ double expression()
 double term()
 {
     double left = primary();
-    Token t = get_token();
+    Token t = ts.get();
     while (true)
     {
         switch (t.kind)
         {
         case '*':
             left *= primary();
-            t = get_token();
+            t = ts.get();
             break;
         case '/':
         {
             double d = primary();
             if (d == 0)
             {
-                std::cout << "Error: Divide by 0." << std::endl;
+                std::cerr << "Error: Divide by 0." << std::endl;
                 std::exit(-1);
             }
             left /= primary();
-            t = get_token();
+            t = ts.get();
             break;
         }
         default:
+            ts.putback(t);
             return left;
+            break;
         }
     }
 }
 
 double primary()
 {
-    Token t = get_token();
+    Token t = ts.get();
     switch (t.kind)
     {
     case '(':
     {
         double d = expression();
-        t = get_token();
+        t = ts.get();
         if (t.kind != ')')
         {
-            std::cout << "Error: ) expected." << std::endl;
+            std::cerr << "Error: ) expected." << std::endl;
             std::exit(-2);
         }
     }
-
     case '8':
         return t.value;
-
+        break;
     default:
         std::cout << "Error: primary expected." << std::endl;
         std::exit(-3);
+        break;
     }
 }
 
@@ -92,20 +94,36 @@ int main()
 {
     try
     {
-        while (cin)
+        double val = 0;
+
+        while (std::cin)
         {
-            std::cout << "=" << expression() << std::endl;
+            Token t = ts.get();
+
+            if (t.kind == 'q')
+            {
+                break;
+            }
+            if (t.kind == ';')
+            {
+                std::cout << "= " << val << std::endl;
+            }
+            else
+            {
+                ts.putback(t);
+                val = expression();
+            }
         }
-        catch (exception &e)
-        {
-            std::cerr << e.what() << std::endl;
-            return 1;
-        }
-        catch (...)
-        {
-            std::cerr << "exception" << std::endl;
-            return 2;
-        }
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
+    catch (...)
+    {
+        std::cerr << "exception" << std::endl;
+        return 2;
     }
 
     return 0;
