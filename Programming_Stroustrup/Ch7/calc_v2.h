@@ -15,13 +15,19 @@ struct Token
     double value;
 };
 
+struct Variable
+{
+    std::string name;
+    double value;
+};
+
 class Token_Stream
 {
 public:
     Token_Stream();
     Token get();
     void putback(Token t);
-    void ignore(char c);
+    void ignore_until(char c);
 
 private:
     Token buffer;
@@ -30,6 +36,20 @@ private:
 
 Token_Stream::Token_Stream()
 {
+}
+
+void Token_Stream::ignore_until(char c)
+{
+    full = false;
+
+    if (c != buffer.kind)
+    {
+        char ch = 0;
+        while (std::cin >> ch && ch != c)
+        {
+            ; // Remove all characters from the stdin buffer until matching char is read
+        }
+    }
 }
 
 void Token_Stream::putback(Token t)

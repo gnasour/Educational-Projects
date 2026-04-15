@@ -9,7 +9,39 @@ double expression();
 double term();
 double primary();
 void clean_up_mess();
+
 std::vector<Token> tok;
+std::vector<Variable> var_table;
+
+double get_value(std::string s)
+{
+
+    for (const Variable &v : var_table)
+    {
+        if (v.name == s)
+        {
+            return v.value;
+        }
+    }
+
+    std::cout << "get: undefined variable -- " << s << std::endl;
+    throw std::exception();
+}
+
+void set_value(std::string s, double d)
+{
+    for (Variable &v : var_table)
+    {
+        if (v.name == s)
+        {
+            v.value = d;
+            return;
+        }
+    }
+
+    std::cout << "set: undefined variable -- " << s << std::endl;
+    throw std::exception();
+}
 
 double expression()
 {
@@ -146,14 +178,7 @@ void calculate()
 
 void clean_up_mess()
 {
-    while (true)
-    {
-        Token t = ts.get();
-        if (t.kind == print)
-        {
-            break;
-        }
-    }
+    ts.ignore_until(print);
 }
 
 int main()
