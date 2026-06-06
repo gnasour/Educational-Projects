@@ -59,8 +59,8 @@ int main()
         << "; window size: " << win.x_max() << "*" << win.y_max();
     Text sizes{Point{100, 20}, oss.str()};
 
-    Image cal{Point{225, 225}, "snow_cpp.gif"};
-    cal.set_mask(Point{40, 40}, 200, 150);
+    Image cal{Point{0, 0}, "/home/code/Desktop/funny.gif"};
+    cal.set_mask(Point{40, 40}, 400, 400);
 
     // Window modifications
     win.attach(cal);
